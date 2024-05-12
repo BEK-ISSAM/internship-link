@@ -1,0 +1,125 @@
+/* styles.css */
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Float four columns side by side */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {
+    margin: 0 -5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Style the counter cards */
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+  .logo-container {
+    position: absolute;
+    top: 1;
+    left: 1;
+    padding: 5px;
+    background-color: white; /* Ajoutez la couleur de fond souhaitée */
+  }
+  
+  .logo {
+    width: 50px; /* Ajustez la taille du logo selon vos besoins */
+    height: auto;
+    border: 2px solid black; /* Ajoutez le style de cadre souhaité */
+    border-radius: 50%; /* Pour obtenir un cadre rond */
+  }
+
+
+
+/* Ajoutez ces styles pour le bouton */
+/* GridJob.css */
+
+/* Ajoutez ces styles pour la disposition de la carte */
+/* styles.css */
+
+.card {
+  position: relative;
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+}
+
+.logo {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+
+
+/* Ajoutez ces styles pour le bouton */
+.card-button {
+  position: absolute;
+  right: 10px; /* Décalage du bouton à droite */
+  bottom: 10px; /* Décalage du bouton vers le bas */
+  padding: 10px 20px;
+  background-color: #4d535a; /* Couleur de fond du bouton */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #0e0e0f; /* Couleur de fond du bouton au survol */
+}
+.card:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+p{
+  font-size: 14px;
+}

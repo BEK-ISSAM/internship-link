@@ -1,0 +1,26 @@
+/* styles.css */
+
+.item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu menu main main main main'
+    'menu menu main main main main';
+  gap: 10px;
+  background-color: #a9aeb1;
+  padding: 10px;
+ 
+}
+
+.grid-container > div {
+  background-color: rgb(255, 255, 255);
+  /* text-align: center; */
+  padding: 20px 0;
+  font-size: 30px;
+  
+}

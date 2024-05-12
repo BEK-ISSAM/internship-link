@@ -5,6 +5,8 @@ import { faLandmark } from "@fortawesome/free-solid-svg-icons";
 import LoginCard from "../components/LoginCard";
 import SignUpCard from "../components/SignUpCard";
 import AuthCard from "../components/AuthCard";
+import GridHome from "../components/GridHome/GridHome"
+import Test from "../components/Test/Test"
 
 const App = () => {
   return (
@@ -41,41 +43,11 @@ const App = () => {
         <SignUpCard className="sign-up-card"></SignUpCard>
       </div> */}
 
-      <AuthCard></AuthCard>
+      {/* <AuthCard></AuthCard> */}
+      {/* <GridHome></GridHome> */}
+      <Test></Test>
       
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
-      <h1>ashdgjhsagda</h1>
+     
     </div>
   );
 };
