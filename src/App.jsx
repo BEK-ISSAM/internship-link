@@ -7,44 +7,12 @@ import SignUpCard from "../components/SignUpCard";
 import AuthCard from "../components/AuthCard";
 import GridHome from "../components/GridHome/GridHome"
 import Test from "../components/Test/Test"
+import  NavbarContainer from "../components/Navbar/NavBar"
 
 const App = () => {
   return (
     <div className="body-container">
-      <nav className="navbar">
-        <ul className="navbar-list">
-          <li className="navbar-item">
-            <a href="">
-              <FontAwesomeIcon className="faLandmark" icon={faLandmark} />
-            </a>
-          </li>
-          <li className="navbar-item">
-            <a href="">Find Jobs</a>
-          </li>
-          <li className="navbar-item">
-            <a href="">Companies</a>
-          </li>
-          <li className="navbar-item">
-            <a href="">Post A Job</a>
-          </li>
-          <li className="navbar-item profile">
-            <a href="">
-              <img src="../images/user.png" alt="Profile" />
-              <span>Profile</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      {/* <div className="login-card-container">
-        <LoginCard className="login-card"></LoginCard>
-      </div>
-      <div className="sign-up-card-container">
-        <SignUpCard className="sign-up-card"></SignUpCard>
-      </div> */}
-
-      {/* <AuthCard></AuthCard> */}
-      {/* <GridHome></GridHome> */}
+      < NavbarContainer></ NavbarContainer>
       <Test></Test>
       
      

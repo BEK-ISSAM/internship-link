@@ -32,10 +32,7 @@
 .btn {
     font-weight: 600;
     transition: .5s;
-    margin: 0px 0px 0px 124px ;
-    text-align: center;
 }
-
 
 .btn-square {
     width: 32px;
@@ -312,8 +309,6 @@
     overflow: hidden;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
-    width: 80px;
-    
 }
 
 .fruite .fruite-item .fruite-img img {
