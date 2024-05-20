@@ -1,21 +1,18 @@
 import React from "react";
 import "./App.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLandmark } from "@fortawesome/free-solid-svg-icons";
-import LoginCard from "../components/LoginCard";
-import SignUpCard from "../components/SignUpCard";
+import NavbarContainer from "../components/Navbar/NavbarContainer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthCard from "../components/AuthCard";
-import GridHome from "../components/GridHome/GridHome"
-import Test from "../components/Test/Test"
-import  NavbarContainer from "../components/Navbar/NavBar"
 
 const App = () => {
   return (
     <div className="body-container">
-      < NavbarContainer></ NavbarContainer>
-      <Test></Test>
-      
-     
+      <Router>
+      <NavbarContainer></NavbarContainer>
+        <Routes>
+          <Route exact path="/" element={<AuthCard />} />
+        </Routes>
+      </Router>
     </div>
   );
 };

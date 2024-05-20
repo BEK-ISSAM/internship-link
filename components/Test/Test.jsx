@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./bootstrap.min.css";
 import "./style.css";
+import NavbarContainer from "../Navbar/NavbarContainer";
 
 export default function Test() {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -16,6 +17,7 @@ export default function Test() {
 
   return (
     <div className="container-fluid fruite py-5">
+      <NavbarContainer></NavbarContainer>
       <div className="container py-5">
         <h1 className="mb-4"></h1>
         <div className="row g-4">
