@@ -1,0 +1,96 @@
+.section-full {
+    padding-top: 120px;
+    padding-bottom: 90px;
+  }
+  
+  .site-bg-gray {
+    background-color: #f9f9f9;
+  }
+  
+  .twm-job-categories-area .section-head {
+    margin-bottom: 30px;
+  }
+  
+  .wt-small-separator.site-text-primary div {
+    font-size: 18px;
+    color: #007bff;
+  }
+  
+  .wt-title {
+    font-size: 36px;
+    font-weight: 700;
+  }
+  
+  .twm-job-categories-section {
+    margin-top: 50px;
+  }
+  
+  .job-categories-block {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+  }
+  
+  .job-categories-block .twm-media {
+    margin-bottom: 10px;
+  }
+  
+  .job-categories-block .twm-media .flaticon-dashboard,
+  .job-categories-block .twm-media .flaticon-project-management,
+  .job-categories-block .twm-media .flaticon-note,
+  .job-categories-block .twm-media .flaticon-customer-support,
+  .job-categories-block .twm-media .flaticon-bars,
+  .job-categories-block .twm-media .flaticon-user,
+  .job-categories-block .twm-media .flaticon-computer,
+  .job-categories-block .twm-media .flaticon-coding,
+  .job-categories-block .twm-media .flaticon-hr,
+  .job-categories-block .twm-media .flaticon-healthcare,
+  .job-categories-block .twm-media .flaticon-repair,
+  .job-categories-block .twm-media .flaticon-teacher,
+  .job-categories-block .twm-media .flaticon-bank,
+  .job-categories-block .twm-media .flaticon-deal,
+  .job-categories-block .twm-media .flaticon-tray,
+  .job-categories-block .twm-media .flaticon-tower,
+  .job-categories-block .twm-media .flaticon-lotus,
+  .job-categories-block .twm-media .flaticon-camera-tripod,
+  .job-categories-block .twm-media .flaticon-multimedia,
+  .job-categories-block .twm-media .flaticon-contract,
+  .job-categories-block .twm-media .flaticon-engineer {
+    font-size: 50px;
+    color: #007bff;
+  }
+  
+  .twm-jobs-available {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 5px;
+  }
+  
+  .twm-content a {
+    font-size: 18px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .twm-content a:hover {
+    text-decoration: underline;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .site-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .site-button:hover {
+    background-color: #0056b3;
+  }
+  

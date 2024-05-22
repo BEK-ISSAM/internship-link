@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Test from '../Test/Test'
+
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMapMarkerAlt, faEnvelope, faShoppingBag, faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+
 
 function NavBars() {
+
+
+    const [Open , setOpen]=useState(false);
+    const Menu=["Profil" , "Mode stagaire" , "Deconexion"];
     return (
-        <div className="container topbar bg-primary d-none d-lg-block">
+        <>
+      
+        
+        <div className="container topbar bg-info d-none d-lg-block">
             <div className="d-flex justify-content-between">
                 <div className="top-info ps-2">
                     <small className="me-3"><FontAwesomeIcon icon={faMapMarkerAlt} className="me-2 text-secondary" /> <a href="#" className="text-white">123 Street, New York</a></small>
@@ -17,20 +31,36 @@ function NavBars() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 
 function Navbar() {
+
+    
+      
     return (
+        <div>
+              <Router>
+      
+             <Routes>    
+            <Route path="/Jobs" element={<Test />}>
+                
+            </Route>
+            </Routes>
+
         <nav className="navbar navbar-light bg-white navbar-expand-xl">
             <a href="index.html" className="navbar-brand"><h1 className="text-primary display-6">InterLink</h1></a>
             <button className="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <FontAwesomeIcon icon={faBars} className="text-primary" />
             </button>
+           
             <div className="collapse navbar-collapse bg-white" id="navbarCollapse">
+
                 <div className="navbar-nav mx-auto">
                     <a href="index.html" className="nav-item nav-link active">Home</a>
-                    <a href="shop.html" className="nav-item nav-link">Offres</a>
+                    <Link className="nav-item nav-link" to="/Jobs">asdad</Link>
+                    <a href=""  className="nav-item nav-link">Offres</a>
                     <a href="shop-detail.html" className="nav-item nav-link">Mes Emplois</a>
                     <a href="shop-detail.html" className="nav-item nav-link">Entreprises</a>
                     <a href="contact.html" className="nav-item nav-link">Contact</a>
@@ -44,12 +74,21 @@ function Navbar() {
                        
                         <span className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style={{ top: '-5px', left: '15px', height: '20px', minWidth: '20px' }}>3</span>
                     </a>
-                    <a href="#" className="my-auto">
+
+                    <a href="" className="my-auto">
                         <FontAwesomeIcon icon={faUser} className="fa-2x" />
+                        
+                       
+
                     </a>
+                   
                 </div>
             </div>
         </nav>
+        </Router>
+
+        </div>
+        
     );
 }
 
