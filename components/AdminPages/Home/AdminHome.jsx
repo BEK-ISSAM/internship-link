@@ -1,5 +1,6 @@
 import React from 'react';
 import AdminJobs from '../AdminJobs/AdminJobs';
+import AddJobs from '../CrudJobs/AddJobs';
 
 const AdminHome = ({ activeContent }) => {
   return (
@@ -51,7 +52,7 @@ const AdminHome = ({ activeContent }) => {
           <AdminJobs></AdminJobs>
         )}
         {activeContent === 'AddJobs' && (
-          <div>Content for Static Navigation</div>
+          <AddJobs></AddJobs>
         )}
         {activeContent === 'Postulation' && (
           <div>Content for Light Sidenav</div>

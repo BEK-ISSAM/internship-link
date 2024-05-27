@@ -6,10 +6,19 @@ import bcrypt from 'bcrypt';
 import Company from './models/CompanyModel.js';
 import Intern from './models/InternModel.js';
 import Job from './models/JobModel.js';
+import cors from 'cors';
+
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
 
 // Initialize Express app
 const app = express();
 
+app.use(cors(corsOptions));
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -22,6 +31,21 @@ mongoose.connect('mongodb://localhost:27017/internlinkDB')
 .catch((error) => {
   console.error('Error connecting to MongoDB:', error);
 });
+
+
+app.post("/CreatJob", (req,res)=>{
+  Job.create(req.body)
+  .then(Job=>res.json(Job))
+  .catch(err=>res.json(err))
+
+})
+
+app.get("/GetJobs", (req,res)=>{
+  Job.find({})
+  .then(Job=>res.json(Job))
+  .catch(err=>res.json(err))
+  
+})
 
 // Initialization function to insert data into collections
 //----------------------------------------------------------------------------------------

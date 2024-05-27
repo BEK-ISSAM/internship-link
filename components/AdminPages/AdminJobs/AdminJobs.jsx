@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css"
+import axios from "axios";
 
 
 export default function AdminJobs(){
+
+    const [Jobs , setJobs]=useState();
+  useEffect(()=>{
+    axios.get('http://localhost:3000/GetJobs')
+    .then(result=>setJobs(result.data))
+    .catch(err=>console.log(err))
+  },[])
 
     return (
     <div className="container-fluid px-4">

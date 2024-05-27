@@ -20,14 +20,14 @@ import AppAdmin from "../components/AdminPages/Home/AppAdmin"
 const App = () => {
   return (
     <div className="body-container">
-      < NavbarContainer></ NavbarContainer>
+      {/* < NavbarContainer></ NavbarContainer> */}
      {/* <Test></Test> */}
-     <HomePage></HomePage>
+     {/* <HomePage></HomePage>
      <HowWorks></HowWorks>
-     <JobsCategories></JobsCategories>
+     <JobsCategories></JobsCategories> */}
      
 
-      {/* <AppAdmin></AppAdmin> */}
+      <AppAdmin></AppAdmin>
    
      
     </div>
