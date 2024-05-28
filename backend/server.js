@@ -7,6 +7,9 @@ import Company from './models/CompanyModel.js';
 import Intern from './models/InternModel.js';
 import Job from './models/JobModel.js';
 import cors from 'cors';
+import UserRouter from './routes/UserRouter.js'
+
+
 
 const corsOptions = {
   origin: '*',
@@ -46,6 +49,23 @@ app.get("/GetJobs", (req,res)=>{
   .catch(err=>res.json(err))
   
 })
+
+
+//Authentification 
+
+app.use('/User/', UserRouter);
+
+// app.post("/registerUser" , (req , res)=>{
+//   Intern.create(req.body)
+//   .then(Intern=>{res.json(Intern)  })
+  
+//   .catch(err=>res.json(err))
+
+// })
+
+// app.get("/getUser" , (req,res)=>{
+//   Intern.findOne({email : email})
+// })
 
 // Initialization function to insert data into collections
 //----------------------------------------------------------------------------------------

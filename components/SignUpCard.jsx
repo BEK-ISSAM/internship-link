@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignUpCard.css";
+import axios from 'axios';
+import { toast } from "react-toastify";
 
 const SignUpCard = () => {
+
+  const[name , setFirstname]=useState('');
+  const[lastName , setLastname]=useState('');
+  const[email , setEmail]=useState('');
+  const[password , setPassword]=useState('');
+
+  const Submit = (e)=>{
+    e.preventDefault();
+    axios.post('http://localhost:3000/User/registerUser' ,{name , email , password})
+    .then(result =>{
+      toast.success("sucess");
+      console.log(result);})
+    .catch(err=>console.log(err))
+   
+}
+
   return (
     <div className="signup-card">
       <h1 className="signup-title">Sign Up</h1>
-      <form action="" className="signup-form">
+      <form  onSubmit={Submit} className="signup-form">
         <div className="form-group">
           <label htmlFor="firstName" className="form-label">
             First Name:
           </label>
           <input
             type="text"
+            onChange={(e)=>setFirstname(e.target.value)}
             id="firstName"
             name="firstName"
             className="form-input"
@@ -28,6 +47,7 @@ const SignUpCard = () => {
             name="lastName"
             className="form-input"
             placeholder="Doe"
+            onChange={(e)=>setLastname(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -40,6 +60,7 @@ const SignUpCard = () => {
             name="email"
             className="form-input"
             placeholder="example@example.com"
+            onChange={(e)=>setEmail(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -52,6 +73,7 @@ const SignUpCard = () => {
             name="password"
             className="form-input"
             placeholder="********"
+            onChange={(e)=>setPassword(e.target.value)}
           />
         </div>
         <div className="form-group">

@@ -11,26 +11,45 @@ import  NavbarContainer from "../components/Navbar/NavBar"
 import HomePage from "../components/Home/HomePage";
 import HowWorks from "../components/Home/SectionHowWorks/HowWorks";
 import JobsCategories from "../components/Home/Categorie/Categories";
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AppAdmin from "../components/AdminPages/Home/AppAdmin"
 
 
 
 
 const App = () => {
+  
   return (
-    <div className="body-container">
-      {/* < NavbarContainer></ NavbarContainer> */}
-     {/* <Test></Test> */}
-     {/* <HomePage></HomePage>
-     <HowWorks></HowWorks>
-     <JobsCategories></JobsCategories> */}
+    // <div className="body-container">
+    //   {/* < NavbarContainer></ NavbarContainer> */}
+    //  {/* <Test></Test> */}
+    //  {/* <HomePage></HomePage>
+    //  <HowWorks></HowWorks>
+    //  <JobsCategories></JobsCategories> */}
      
 
-      <AppAdmin></AppAdmin>
-   
+    //   {/* <AppAdmin></AppAdmin> */}
+    //   <AuthCard></AuthCard>
+      
      
-    </div>
+    // </div>
+    
+    <Router>
+      
+      <div>
+       
+      
+          <Routes>
+            
+            <Route path="/" element={<AuthCard />} />
+            <Route path="/User" element={<AppAdmin />} />
+            
+            {/* <Route path="/" element={<Home />} /> */}
+            
+          </Routes>
+        
+      </div>
+    </Router>
   );
 };
 

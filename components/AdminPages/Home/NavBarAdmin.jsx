@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFontAwesome } from '@fortawesome/free-solid-svg-icons';
 import { faBars ,faMapMarkerAlt, faEnvelope, faShoppingBag, faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const NavBarAdmin = () => {
+
+  const navigate = useNavigate();  
+
+
+  const handelLogout=()=>{
+
+    const user_data = localStorage.getItem('user_data');
+    const token = localStorage.getItem('token');
+    if(user_data || token ){
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_data');
+    
+    navigate('/')
+    }else{
+      console.log("localStotage vide");
+    }
+       
+    
+
+  }
+
+
+
   return (
     <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <a className="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
@@ -23,7 +49,7 @@ const NavBarAdmin = () => {
             <li><a className="dropdown-item" href="#!">Settings</a></li>
             <li><a className="dropdown-item" href="#!">Activity Log</a></li>
             <li><hr className="dropdown-divider" /></li>
-            <li><a className="dropdown-item" href="#!">Logout</a></li>
+            <li><button onClick={handelLogout} className="dropdown-item" >Logout</button></li>
           </ul>
         </li>
       </ul>
