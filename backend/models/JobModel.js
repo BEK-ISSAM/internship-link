@@ -1,22 +1,22 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-const jobSchema = new mongoose.Schema({
+const JobSchema = new mongoose.Schema({
   title: String,
   description: String,
   datePosted: Date,
   type: String,
   numberOfApplicants: Number,
   salary: Number,
-  contrat : String,
-  // company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
-  company : String ,
+  contract: String,
+  company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
   location: String,
   requirements: String,
   responsibilities: String,
   postExpiryDate: Date,
-  postedBy: String // Assuming 'postedBy' is a string representing the name of a person
+  postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Recruiter' },
+  assignedTo: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Intern' }]
 });
 
-const Job = mongoose.model('Job', jobSchema);
+const Job = mongoose.model('Job', JobSchema);
 
 export default Job;

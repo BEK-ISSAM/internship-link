@@ -8,7 +8,7 @@ import Intern from './models/InternModel.js';
 import Job from './models/JobModel.js';
 import cors from 'cors';
 import UserRouter from './routes/UserRouter.js'
-
+import JobRouter from "./routes/JobRouter.js"
 
 
 const corsOptions = {
@@ -21,7 +21,7 @@ const corsOptions = {
 // Initialize Express app
 const app = express();
 
-app.use(cors(corsOptions));
+app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -35,25 +35,10 @@ mongoose.connect('mongodb://localhost:27017/internlinkDB')
   console.error('Error connecting to MongoDB:', error);
 });
 
-
-app.post("/CreatJob", (req,res)=>{
-  Job.create(req.body)
-  .then(Job=>res.json(Job))
-  .catch(err=>res.json(err))
-
-})
-
-app.get("/GetJobs", (req,res)=>{
-  Job.find({})
-  .then(Job=>res.json(Job))
-  .catch(err=>res.json(err))
-  
-})
+app.use('/User', UserRouter);
+app.use("/Jobs", JobRouter);
 
 
-//Authentification 
-
-app.use('/User/', UserRouter);
 
 // app.post("/registerUser" , (req , res)=>{
 //   Intern.create(req.body)
@@ -134,7 +119,7 @@ app.use('/User/', UserRouter);
 
 //----------------------------------------------------------------------------------------
 
-
+//Authentification 
 // Middleware to verify JWT token
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization;

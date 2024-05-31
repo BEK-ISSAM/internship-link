@@ -1,0 +1,128 @@
+import Job from '../models/JobModel.js';
+import Company from '../models/CompanyModel.js';
+import Recruiter from '../models/RecruiterModel.js';
+import Intern from '../models/InternModel.js';
+
+// Create a new job
+export const createJob = async (req, res) => {
+    try {
+        console.log('Received request body:', req.body);
+        const { title, description, type, salary, contract, location, requirements, responsibilities, assignedTo } = req.body;
+
+        let assignedToInterns = [];
+        let assignedInternsArray = assignedTo || []; // Default to empty array if not provided
+        if (assignedInternsArray.length > 0) {
+            // Validate assignedTo interns
+            assignedToInterns = await Intern.find({ _id: { $in: assignedInternsArray } });
+            if (assignedInternsArray.length !== assignedToInterns.length) {
+                return res.status(400).json({ message: 'One or more assigned interns not found' });
+            }
+        }
+
+        const newJob = new Job({
+            title,
+            description,
+            datePosted: new Date(),
+            type,
+            salary,
+            contract,
+            company: "6659362879f01bd25038d7e9",
+            location,
+            requirements,
+            responsibilities,
+            postExpiryDate: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
+            postedBy: "6659384479f01bd25038d7ef",
+            assignedTo: assignedInternsArray
+        });
+
+        const savedJob = await newJob.save();
+        res.status(201).json(savedJob);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+        console.log("An error occurred during job creation:", err);
+    }
+};
+
+
+// Get all jobs
+export const getAllJobs = async (req, res) => {
+    try {
+        const jobs = await Job.find().populate('company').populate('postedBy').populate('assignedTo');
+        res.json(jobs);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// Get a job by ID
+export const getJobById = async (req, res) => {
+    try {
+        const job = await Job.findById(req.params.id).populate('company').populate('postedBy').populate('assignedTo');
+        if (!job) {
+            return res.status(404).json({ message: 'Job not found' });
+        }
+        res.json(job);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// Update a job
+export const updateJob = async (req, res) => {
+    try {
+        const { title, description, type, salary, contract, companyId, location, requirements, responsibilities, postExpiryDate, assignedTo } = req.body;
+
+        const job = await Job.findById(req.params.id);
+        if (!job) {
+            return res.status(404).json({ message: 'Job not found' });
+        }
+
+        if (companyId) {
+            const company = await Company.findById(companyId);
+            if (!company) {
+                return res.status(400).json({ message: 'Company not found' });
+            }
+            job.company = company._id;
+        }
+
+        job.title = title || job.title;
+        job.description = description || job.description;
+        job.type = type || job.type;
+        job.salary = salary || job.salary;
+        job.contract = contract || job.contract;
+        job.location = location || job.location;
+        job.requirements = requirements || job.requirements;
+        job.responsibilities = responsibilities || job.responsibilities;
+        job.postExpiryDate = postExpiryDate || job.postExpiryDate;
+        job.assignedTo = assignedTo || [];  // Ensure assignedTo is an empty array if not provided
+
+        let assignedToInterns = [];
+        if (job.assignedTo.length > 0) {
+            // Validate assignedTo interns
+            assignedToInterns = await Intern.find({ _id: { $in: job.assignedTo } });
+            if (job.assignedTo.length !== assignedToInterns.length) {
+                return res.status(400).json({ message: 'One or more assigned interns not found' });
+            }
+        }
+
+        const updatedJob = await job.save();
+        res.json(updatedJob);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// Delete a job
+export const deleteJob = async (req, res) => {
+    try {
+        const job = await Job.findById(req.params.id);
+        if (!job) {
+            return res.status(404).json({ message: 'Job not found' });
+        }
+
+        await job.remove();
+        res.json({ message: 'Job deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};

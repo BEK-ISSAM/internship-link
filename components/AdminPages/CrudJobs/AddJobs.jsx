@@ -1,174 +1,164 @@
-
-import React , {useState} from "react";
+import React, { useState } from 'react';
 import axios from 'axios';
- 
-export default function AddJobs(){
 
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
-    const [datePosted, setDatePosted] = useState();
-    const [type, setType] = useState();
-    const [contrat, setContrat] = useState();
-    const [salary, setSalary] = useState();
-    const [location, setLocation] = useState();
-    const [requirements, setRequirements] = useState();
-    const [responsibilities, setResponsibilities] = useState();
-    const [postExpiryDate, setPostExpiryDate] = useState();
-    const [compagnies, setcompagnies] = useState();
-  
-  
-    const Submit = (e)=>{
-        e.preventDefault();
-        axios.post('http://localhost:3000/CreatJob' ,{title , description , compagnies , datePosted , type , contrat , salary , location , requirements , responsibilities , postExpiryDate})
-        .then(result =>console.log(result))
-        .catch(err=>console.log(err))
-       
+const api = axios.create({
+  baseURL: 'http://localhost:3000',
+  timeout: 10000,
+});
+
+const AddJobs = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [type, setType] = useState('');
+  const [salary, setSalary] = useState('');
+  const [contract, setContract] = useState('');
+  const [location, setLocation] = useState('');
+  const [requirements, setRequirements] = useState('');
+  const [responsibilities, setResponsibilities] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log('Submitting job with data:', {
+        title,
+        description,
+        type,
+        salary,
+        contract,
+        location,
+        requirements,
+        responsibilities,
+        assignedTo: [], // Ensure assignedTo is an empty array if not provided
+      });
+      const response = await api.post('/Jobs/CreateJob', {
+        title,
+        description,
+        type,
+        salary,
+        contract,
+        location,
+        requirements,
+        responsibilities,
+        assignedTo: [], // Ensure assignedTo is an empty array if not provided
+      });
+      console.log(response.data);
+      // Reset form after successful submission (if needed)
+      setTitle('');
+      setDescription('');
+      setType('');
+      setSalary('');
+      setContract('');
+      setLocation('');
+      setRequirements('');
+      setResponsibilities('');
+    } catch (error) {
+      console.error('Error creating job:', error);
     }
-  
+  };
 
-    const today = new Date().toISOString().split('T')[0];
+  return (
+    <div className="container">
+      <h2>Create a New Job</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            className="form-control"
+            id="title"
+            placeholder="Enter job title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <textarea
+            className="form-control"
+            id="description"
+            placeholder="Enter job description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="type">Type</label>
+          <input
+            type="text"
+            className="form-control"
+            id="type"
+            placeholder="Enter job type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="salary">Salary</label>
+          <input
+            type="number"
+            className="form-control"
+            id="salary"
+            placeholder="Enter job salary"
+            value={salary}
+            onChange={(e) => setSalary(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contract">Contract</label>
+          <input
+            type="text"
+            className="form-control"
+            id="contract"
+            placeholder="Enter job contract type"
+            value={contract}
+            onChange={(e) => setContract(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="location">Location</label>
+          <input
+            type="text"
+            className="form-control"
+            id="location"
+            placeholder="Enter job location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="requirements">Requirements</label>
+          <textarea
+            className="form-control"
+            id="requirements"
+            placeholder="Enter job requirements"
+            value={requirements}
+            onChange={(e) => setRequirements(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="responsibilities">Responsibilities</label>
+          <textarea
+            className="form-control"
+            id="responsibilities"
+            placeholder="Enter job responsibilities"
+            value={responsibilities}
+            onChange={(e) => setResponsibilities(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
 
-    return( <>
-         <form onSubmit={Submit} >
-      <div className="form-group">
-        <label htmlFor="">Titre</label>
-        <input
-          type="text"
-          className="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Entrer le titre"
-          onChange={(e)=>setTitle(e.target.value)}
-        />
-        <small id="emailHelp" className="form-text text-muted">
-         *
-        </small>
-      </div>
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Description</label>
-        <input
-          type="Text"
-          className="form-control"
-          id="exampleInputPassword1"
-          placeholder="Description"
-          onChange={(e)=>setDescription(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Compagnies</label>
-        <input
-          type="Text"
-          className="form-control"
-          id="exampleInputPassword1"
-          placeholder="Description"
-          onChange={(e)=>setcompagnies(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Date</label>
-        <input
-          type="Date"
-          className="form-control"
-          id="exampleDate"
-          value={today}
-          onMouseMove={(e)=>setDatePosted(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Type</label>
-        <input
-          type="Text"
-          className="form-control"
-          id="exampleType"
-          placeholder="Type"
-          onChange={(e)=>setType(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Contrat</label>
-        <input
-          type="Text"
-          className="form-control"
-          id="exampleContart"
-          placeholder="Contrat"
-          onChange={(e)=>setContrat(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Salaire</label>
-        <input
-          type="number"
-          
-          className="form-control"
-          id="exampleSalaire"
-          placeholder="Salaire"
-          onChange={(e)=>setSalary(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Localisation</label>
-        <input
-          type="Text"
-          className="form-control"
-          id="exampleLocalisation"
-          placeholder="Localisation"
-          onChange={(e)=>setLocation(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Exigence</label>
-        <input
-          type="Text"
-          className="form-control"
-          id="exampleExigence"
-          placeholder="Exigence"
-          onChange={(e)=>setRequirements(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Responsabilite</label>
-        <input
-          type="Text"
-          className="form-control"
-          id="exampleResponsabilite"
-          placeholder="Responsabilite"
-          onChange={(e)=>setResponsibilities(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Date d'expiration</label>
-        <input
-          type="date"
-          className="form-control"
-          id="exampleDateDexpiration"
-          placeholder="Date d'expiration"
-          onChange={(e)=>setPostExpiryDate(e.target.value)}
-        />
-      </div>
-
-
-      <div className="form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="exampleCheck1"
-        />
-        <label className="form-check-label" htmlFor="exampleCheck1">
-          Check me out
-        </label>
-      </div>
-
-      <button type="submit" className="btn btn-primary">Submit</button>
-    </form>
-    </>
-    );
-}
+export default AddJobs;
