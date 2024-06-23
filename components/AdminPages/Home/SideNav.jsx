@@ -1,6 +1,10 @@
 import React from 'react';
 
 const SideNav = ({ setActiveContent }) => {
+
+  const data = JSON.parse(localStorage.getItem("user_data"))
+  const username = data.name
+  
   return (
     <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
       <div className="sb-sidenav-menu">
@@ -30,7 +34,7 @@ const SideNav = ({ setActiveContent }) => {
           </a>
          
           <div className="sb-sidenav-menu-heading">Addons</div>
-          <a className="nav-link" href="#!" onClick={() => setActiveContent('Charts')}>
+          <a className="nav-link" href="#!" onClick={() => setActiveContent('Tasks')}>
             <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
             Suivie
           </a>
@@ -39,7 +43,7 @@ const SideNav = ({ setActiveContent }) => {
       </div>
       <div className="sb-sidenav-footer">
         <div className="small">Logged in as:</div>
-        Start Bootstrap
+        {username}
       </div>
     </nav>
   );

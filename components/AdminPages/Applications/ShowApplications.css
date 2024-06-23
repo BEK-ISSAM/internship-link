@@ -1,0 +1,77 @@
+/* ShowApplications.css */
+
+.job-applications {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.job-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.job-card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.job-card p {
+  margin-bottom: 10px;
+}
+
+.job-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.job-card th,
+.job-card td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.job-card th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.job-card tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.job-card .action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.job-card .action-buttons button {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.job-card .action-buttons button.accept-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.job-card .action-buttons button.reject-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.job-card .action-buttons button:hover {
+  opacity: 0.8;
+}

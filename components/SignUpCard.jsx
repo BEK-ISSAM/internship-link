@@ -12,7 +12,7 @@ const SignUpCard = () => {
 
   const Submit = (e)=>{
     e.preventDefault();
-    axios.post('http://localhost:3000/User/registerUser' ,{name , email , password})
+    axios.post('http://localhost:3000/User/registerUser' ,{name , lastName, email , password})
     .then(result =>{
       toast.success("sucess");
       console.log(result);})
@@ -23,7 +23,7 @@ const SignUpCard = () => {
   return (
     <div className="signup-card">
       <h1 className="signup-title">Sign Up</h1>
-      <form  onSubmit={Submit} className="signup-form">
+      <form onSubmit={Submit} className="signup-form">
         <div className="form-group">
           <label htmlFor="firstName" className="form-label">
             First Name:

@@ -1,0 +1,33 @@
+.task-list-container {
+    text-align: center;
+  }
+  
+  .list-id-input,
+  .task-input {
+    margin-bottom: 20px;
+  }
+  
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .task {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .task.completed span {
+    text-decoration: line-through;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  

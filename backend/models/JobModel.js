@@ -14,7 +14,8 @@ const JobSchema = new mongoose.Schema({
   responsibilities: String,
   postExpiryDate: Date,
   postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Recruiter' },
-  assignedTo: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Intern' }]
+  assignedTo: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Intern' }],
+  applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Intern' }]
 });
 
 const Job = mongoose.model('Job', JobSchema);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./bootstrap.min.css";
 import "./style.css";
+import NavbarContainer from "../Navbar/NavBar";
 
 
 export default function Test() {
@@ -17,8 +18,10 @@ export default function Test() {
 
   return (
     <>
-    
-    <div className="container-fluid fruite py-5">
+    <div className="">
+      <NavbarContainer />
+    </div>
+    <div className="container-fluid fruite py-5 mt-5">
       <div className="container py-5">
         <h1 className="mb-4"></h1>
         <div className="row g-4">

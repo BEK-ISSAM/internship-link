@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Test from '../Test/Test'
+import "./style.css"
 
 
 
@@ -41,7 +42,7 @@ function Navbar() {
       
     return (
         <div>
-              <Router>
+              {/* <Router> */}
       
              <Routes>    
             <Route path="/Jobs" element={<Test />}>
@@ -85,7 +86,7 @@ function Navbar() {
                 </div>
             </div>
         </nav>
-        </Router>
+        {/* </Router> */}
 
         </div>
         
