@@ -12,20 +12,43 @@ import HowWorks from '../components/Home/SectionHowWorks/HowWorks';
 import JobsCategories from '../components/Home/Categorie/Categories';
 import AppAdmin from '../components/AdminPages/Home/AppAdmin';
 import TaskList from '../components/TaskList/TaskList';
+import Details from '../components/Test/Details/Details';
+import AppUser from '../components/UserPages/Home/AppUser';
+import UpdateProfil from '../components/UserPages/CrudUser/UpdateProfil';
 
 const App = () => {
   return (
+    <>  
+    
+    
     <Router>
-      <div>
+      <div >
         <Routes>
           <Route path="/" element={<AuthCard />} />
+<<<<<<< HEAD
           <Route path="/User" element={<AppAdmin />} />
           <Route path="/Jobs" element={<Test />} />
           <Route exact path="/Home" element={<HomePage />} />
+=======
+          <Route path="/Admin" element={<AppAdmin />} />
+          
+          <Route path="/Jobs/*" element={<Test />} />
+          <Route path="/Home" element={< HomePage/>} />
+          <Route path="/Details/:id" element={<Details />} />
+          <Route path="/User" element={<AppUser />} />
+          <Route path="/UpdateProfil" element={<UpdateProfil />} />
+
+          
+          
+
+          
+>>>>>>> 9847597de37179a50507c0fabb6c0b26b2f5785e
           
         </Routes>
       </div>
     </Router>
+    </>
+
   );
 };
 

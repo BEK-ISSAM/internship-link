@@ -12,6 +12,7 @@ import JobRouter from "./routes/JobRouter.js"
 import ApplicationRouter from "./routes/ApplicationRouter.js"
 import { verifyToken } from './middleware/auth.js';
 import ListRouter from './routes/ListRouter.js';
+import GridJobRouter from './routes/GridJobRouter.js';
 
 
 const corsOptions = {
@@ -42,6 +43,7 @@ app.use('/User', UserRouter);
 app.use("/Jobs", JobRouter);
 app.use("/applications", ApplicationRouter)
 app.use('/todo', ListRouter);
+app.use("/Grid" , GridJobRouter)
 
 
 // Route for user login and JWT token generation
