@@ -56,3 +56,32 @@ export const logoutUser = async (res, req) => {
   res.jwt.TokenExpiredError();
   res.json({ message: "token supprime" });
 };
+
+export const updateIntern = async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  try {
+      // Si le mot de passe est fourni, le hacher avant de le sauvegarder
+      if (updatedData.password) {
+          const salt = await bcrypt.genSalt(10);
+          updatedData.password = await bcrypt.hash(updatedData.password, salt);
+      }
+
+      // Si un fichier CV est fourni, ajouter le chemin au champ 'cv'
+      if (req.file) {
+          updatedData.cv = req.file.path;
+      }
+
+      const updatedIntern = await Intern.findByIdAndUpdate(id, updatedData, { new: true });
+
+      if (!updatedIntern) {
+          return res.status(404).json({ message: 'Intern not found' });
+      }
+
+      res.status(200).json(updatedIntern);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+

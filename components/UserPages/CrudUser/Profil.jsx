@@ -21,7 +21,7 @@ const Profil = () => {
                 </div>
                 <div>
                     
-                    <Link to="/UpdateProfil" className="update-button">Update Information</Link>
+                     <Link to={`/UpdateProfil/${userData._id}`} className="update-button">Update Information</Link>
                     
                 </div>
             </div>
