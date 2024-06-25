@@ -9,16 +9,20 @@ const SignUpCard = () => {
   const[lastName , setLastname]=useState('');
   const[email , setEmail]=useState('');
   const[password , setPassword]=useState('');
+  const[role, setRole] = useState('student'); // Ajout du state pour gérer le rôle
 
   const Submit = (e)=>{
     e.preventDefault();
-    axios.post('http://localhost:3000/User/registerUser' ,{name , lastName, email , password})
+    axios.post('http://localhost:3000/User/registerUser' ,{name , lastName, email , password, role})
     .then(result =>{
-      toast.success("sucess");
-      console.log(result);})
-    .catch(err=>console.log(err))
-   
-}
+      toast.success("Success");
+      console.log(result);
+    })
+    .catch(err => {
+      console.error('Error:', err);
+      toast.error("Registration failed");
+    });
+  }
 
   return (
     <div className="signup-card">
@@ -77,16 +81,28 @@ const SignUpCard = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="confirmPassword" className="form-label">
-            Confirm Password:
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="student"
+              checked={role === 'student'}
+              onChange={() => setRole('student')}
+            />
+            Student
           </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            className="form-input"
-            placeholder="********"
-          />
+          <br/>
+          
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="company"
+              checked={role === 'company'}
+              onChange={() => setRole('company')}
+            />
+            Company
+          </label>
         </div>
 
         <button type="submit" className="submit-btn">Sign Up</button>

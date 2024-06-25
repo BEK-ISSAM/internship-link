@@ -19,7 +19,7 @@ function NavBars() {
         <>
       
         
-        <div className="container topbar bg-info d-none d-lg-block">
+        <div className="container-fluide topbar bg-info d-none d-lg-block">
             <div className="d-flex justify-content-between">
                 <div className="top-info ps-2">
                     <small className="me-3"><FontAwesomeIcon icon={faMapMarkerAlt} className="me-2 text-secondary" /> <a href="#" className="text-white">123 Street, New York</a></small>
@@ -41,7 +41,7 @@ function Navbar() {
     
       
     return (
-        <div>
+        <div className=''>
               {/* <Router> */}
       
              <Routes>    
@@ -60,7 +60,7 @@ function Navbar() {
 
                 <div className="navbar-nav mx-auto">
                     <a href="index.html" className="nav-item nav-link active">Home</a>
-                    <Link className="nav-item nav-link" to="/Jobs">asdad</Link>
+                   s
                     <a href=""  className="nav-item nav-link">Offres</a>
                     <a href="shop-detail.html" className="nav-item nav-link">Mes Emplois</a>
                     <a href="shop-detail.html" className="nav-item nav-link">Entreprises</a>
@@ -95,9 +95,9 @@ function Navbar() {
 
 export default function NavbarContainer() {
     return (
-        <div className="container-fluid fixed-top">
+        <div className="container-fluid fixed-top ">
             <NavBars />
-            <div className="container px-0">
+            <div className="container-fluide px-0">
                 <Navbar />
             </div>
         </div>

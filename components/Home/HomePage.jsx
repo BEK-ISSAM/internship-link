@@ -1,6 +1,9 @@
 import React from 'react';
 import "./bootstrap.min.css";
 import "./style.css";
+import NavbarContainer from '../Navbar/NavBar';
+import JobsCategories from './Categorie/Categories';
+import HowWorks from './SectionHowWorks/HowWorks';
 
 
 
@@ -9,7 +12,7 @@ import "./style.css";
 const HomePage = () => {
     return (
         <>
-        
+        <NavbarContainer/>
         <div className="container-fluid py-5 mb-5 hero-header">
             <div className="container py-5">
                 <div className="row g-5 align-items-center">
@@ -78,7 +81,9 @@ const HomePage = () => {
                 </div>
             </div>
         </div>
-
+        <div className=''>
+        <HowWorks/>
+        </div>
         {/* <div className='text-center'>
             <h5 className='mb-4'>Working Process</h5>
             <h1>How It Works</h1>

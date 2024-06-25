@@ -1,12 +1,29 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "./bootstrap.min.css";
 import "./style.css";
 import NavbarContainer from "../Navbar/NavBar";
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 export default function Test() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortBy, setSortBy] = useState("Nothing");
+
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/Grid/jobs-grid');
+        setJobs(response.data);
+      } catch (error) {
+        console.error('Error fetching jobs:', error);
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchKeyword(event.target.value);
@@ -21,8 +38,9 @@ export default function Test() {
     <div className="">
       <NavbarContainer />
     </div>
-    <div className="container-fluid fruite py-5 mt-5">
-      <div className="container py-5">
+    <div className="">
+    <div className="container-fluid fruite py-5">
+      <div className="container-fluid py-5">
         <h1 className="mb-4"></h1>
         <div className="row g-4">
           <div className="col-lg-12">
@@ -124,303 +142,49 @@ export default function Test() {
               <div className="col-lg-9">
                 <div className="row g-4 justify-content-center">
                   {/* debut de grid card  */}
-                  <div className="col-md-6 col-lg-6 col-xl-4">
-                    <div className="rounded position-relative fruite-item">
-                      <div className="fruite-img">
-                        <img
-                          src="../images/user.png"
-                          className="img-fluid w-100 rounded-top "
-                          alt=""
-                        />
-                      </div>
+                  <div className="container-fluid">
+      <div className="row">
+        {jobs.map((job) => (
+          <div key={job._id} className="col-md-6 col-lg-6 col-xl-4 mb-4">
+            <div className="rounded position-relative fruite-item">
+              <div className="fruite-img">
+                <img
+                  src="../images/user.png"
+                  className="img-fluid w-100 rounded-top"
+                  alt=""
+                />
+              </div>
+              <div
+                className="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                style={{ top: '10px', right: '10px' }}
+              >
+                {job.type}
+              </div>
+              <div className="p-4 border border-secondary border-top-0 rounded-bottom">
+                <h4>{job.title}</h4>
+                <p>{job.description}</p>
+                <div className="d-flex justify-content-between flex-lg-wrap">
+                  <p className="text-dark fs-5 fw-bold fs-6 mb-0">
+                    {job.salary} $ /mois
+                  </p>
+                  <Link
+                    to={`/Details/${job._id}`} // Redirige vers la route des détails du job avec l'ID du job
+                    className="btn border border-secondary rounded-pill px-2 text-primary"
+                  >
+                    <i className="fa fa-shopping-bag text-center"></i>
+                    {' Voir plus'}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
 
-                      <div
-                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style={{ top: "10px", right: "10px" }}
-                      >
-                        Stage Pfa
-                      </div>
-                      <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Concepteur Web senior</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit sed do eiusmod te incididunt
-                        </p>
-                        <div className="d-flex justify-content-between flex-lg-wrap">
-                          <p className="text-dark fs-5 fw-bold fs-6  mb-0">
-                          2 500 $ /mois
-                          </p>
-                          <a
-                            href="#"
-                            className="btn border border-secondary rounded-pill px-2 text-primary"
-                          >
-                            <i className="fa fa-shopping-bag  text-center"></i>{"Voir plus"}
-                           
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-lg-6 col-xl-4">
-                    <div className="rounded position-relative fruite-item">
-                      <div className="fruite-img">
-                        <img
-                          src="../images/user.png"
-                          className="img-fluid w-100 rounded-top "
-                          alt=""
-                        />
-                      </div>
 
-                      <div
-                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style={{ top: "10px", right: "10px" }}
-                      >
-                        Stage Pfa
-                      </div>
-                      <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Concepteur Web senior</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit sed do eiusmod te incididunt
-                        </p>
-                        <div className="d-flex justify-content-between flex-lg-wrap">
-                          <p className="text-dark fs-5 fw-bold fs-6  mb-0">
-                          2 500 $ /mois
-                          </p>
-                          <a
-                            href="#"
-                            className="btn border border-secondary rounded-pill px-2 text-primary"
-                          >
-                            <i className="fa fa-shopping-bag  text-center"></i>{"Voir plus"}
-                           
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-lg-6 col-xl-4">
-                    <div className="rounded position-relative fruite-item">
-                      <div className="fruite-img">
-                        <img
-                          src="../images/user.png"
-                          className="img-fluid w-100 rounded-top "
-                          alt=""
-                        />
-                      </div>
 
-                      <div
-                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style={{ top: "10px", right: "10px" }}
-                      >
-                        Stage Pfa
-                      </div>
-                      <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Concepteur Web senior</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit sed do eiusmod te incididunt
-                        </p>
-                        <div className="d-flex justify-content-between flex-lg-wrap">
-                          <p className="text-dark fs-5 fw-bold fs-6  mb-0">
-                          2 500 $ /mois
-                          </p>
-                          <a
-                            href="#"
-                            className="btn border border-secondary rounded-pill px-2 text-primary"
-                          >
-                            <i className="fa fa-shopping-bag  text-center"></i>{"Voir plus"}
-                           
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-lg-6 col-xl-4">
-                    <div className="rounded position-relative fruite-item">
-                      <div className="fruite-img">
-                        <img
-                          src="../images/user.png"
-                          className="img-fluid w-100 rounded-top "
-                          alt=""
-                        />
-                      </div>
-
-                      <div
-                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style={{ top: "10px", right: "10px" }}
-                      >
-                        Stage Pfa
-                      </div>
-                      <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Concepteur Web senior</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit sed do eiusmod te incididunt
-                        </p>
-                        <div className="d-flex justify-content-between flex-lg-wrap">
-                          <p className="text-dark fs-5 fw-bold fs-6  mb-0">
-                          2 500 $ /mois
-                          </p>
-                          <a
-                            href="#"
-                            className="btn border border-secondary rounded-pill px-2 text-primary"
-                          >
-                            <i className="fa fa-shopping-bag  text-center"></i>{"Voir plus"}
-                           
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-lg-6 col-xl-4">
-                    <div className="rounded position-relative fruite-item">
-                      <div className="fruite-img">
-                        <img
-                          src="../images/user.png"
-                          className="img-fluid w-100 rounded-top "
-                          alt=""
-                        />
-                      </div>
-
-                      <div
-                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style={{ top: "10px", right: "10px" }}
-                      >
-                        Stage Pfa
-                      </div>
-                      <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Concepteur Web senior</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit sed do eiusmod te incididunt
-                        </p>
-                        <div className="d-flex justify-content-between flex-lg-wrap">
-                          <p className="text-dark fs-5 fw-bold fs-6  mb-0">
-                          2 500 $ /mois
-                          </p>
-                          <a
-                            href="#"
-                            className="btn border border-secondary rounded-pill px-2 text-primary"
-                          >
-                            <i className="fa fa-shopping-bag  text-center"></i>{"Voir plus"}
-                           
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-lg-6 col-xl-4">
-                    <div className="rounded position-relative fruite-item">
-                      <div className="fruite-img">
-                        <img
-                          src="../images/user.png"
-                          className="img-fluid w-100 rounded-top "
-                          alt=""
-                        />
-                      </div>
-
-                      <div
-                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style={{ top: "10px", right: "10px" }}
-                      >
-                        Stage Pfa
-                      </div>
-                      <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Concepteur Web senior</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit sed do eiusmod te incididunt
-                        </p>
-                        <div className="d-flex justify-content-between flex-lg-wrap">
-                          <p className="text-dark fs-5 fw-bold fs-6  mb-0">
-                          2 500 $ /mois
-                          </p>
-                          <a
-                            href="#"
-                            className="btn border border-secondary rounded-pill px-2 text-primary"
-                          >
-                            <i className="fa fa-shopping-bag  text-center"></i>{"Voir plus"}
-                           
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-lg-6 col-xl-4">
-                    <div className="rounded position-relative fruite-item">
-                      <div className="fruite-img">
-                        <img
-                          src="../images/user.png"
-                          className="img-fluid w-100 rounded-top "
-                          alt=""
-                        />
-                      </div>
-
-                      <div
-                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style={{ top: "10px", right: "10px" }}
-                      >
-                        Stage Pfa
-                      </div>
-                      <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Concepteur Web senior</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit sed do eiusmod te incididunt
-                        </p>
-                        <div className="d-flex justify-content-between flex-lg-wrap">
-                          <p className="text-dark fs-5 fw-bold fs-6  mb-0">
-                          2 500 $ /mois
-                          </p>
-                          <a
-                            href="#"
-                            className="btn border border-secondary rounded-pill px-2 text-primary"
-                          >
-                            <i className="fa fa-shopping-bag  text-center"></i>{"Voir plus"}
-                           
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-md-6 col-lg-6 col-xl-4">
-                    <div className="rounded position-relative fruite-item">
-                      <div className="fruite-img">
-                        <img
-                          src="../images/user.png"
-                          className="img-fluid w-100 rounded-top "
-                          alt=""
-                        />
-                      </div>
-
-                      <div
-                        className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style={{ top: "10px", right: "10px" }}
-                      >
-                        Stage Pfa
-                      </div>
-                      <div className="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Concepteur Web senior</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit sed do eiusmod te incididunt
-                        </p>
-                        <div className="d-flex justify-content-between flex-lg-wrap">
-                          <p className="text-dark fs-5 fw-bold fs-6  mb-0">
-                          2 500 $ /mois
-                          </p>
-                          <a
-                            href="#"
-                            className="btn border border-secondary rounded-pill px-2 text-primary"
-                          >
-                            <i className="fa fa-shopping-bag  text-center"></i>{"Voir plus"}
-                           
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                 
                   <div className="col-md-6 col-lg-6 col-xl-4">
                     <div className="rounded position-relative fruite-item">
                       <div className="fruite-img">
@@ -499,6 +263,7 @@ export default function Test() {
           </div>
         </div>
       </div>
+    </div>
     </div>
     </>
   );
