@@ -99,6 +99,7 @@ h2 {
   padding: 8px 15px;
   margin-left: 10px;
   border-radius: 5px;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -107,7 +108,7 @@ h2 {
 }
 
 .add-task-for-intern {
-  margin-top: 30px;
+  
 }
 
 .intern-selection {

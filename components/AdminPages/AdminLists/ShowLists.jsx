@@ -13,6 +13,7 @@ const ShowLists = () => {
   // State for input fields
   const [listNewTaskText, setListNewTaskText] = useState({});
   const [internNewTaskText, setInternNewTaskText] = useState("");
+  const [newListName, setNewListName] = useState("");
 
   useEffect(() => {
     fetchLists();
@@ -99,10 +100,18 @@ const ShowLists = () => {
   };
 
   const toggleTask = (listId, taskId, completed) => {
+    const token = localStorage.getItem("token");
+
     axios
-      .put(`http://localhost:3000/todo/lists/${listId}/tasks/${taskId}`, {
-        completed: !completed,
-      })
+      .put(
+        `http://localhost:3000/todo/lists/${listId}/tasks/${taskId}`,
+        { completed: !completed },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         setLists((prevLists) =>
           prevLists.map((list) => (list._id === listId ? response.data : list))
@@ -115,8 +124,14 @@ const ShowLists = () => {
   };
 
   const deleteTask = (listId, taskId) => {
+    const token = localStorage.getItem("token");
+
     axios
-      .delete(`http://localhost:3000/todo/lists/${listId}/tasks/${taskId}`)
+      .delete(`http://localhost:3000/todo/lists/${listId}/tasks/${taskId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         setLists((prevLists) =>
           prevLists.map((list) => (list._id === listId ? response.data : list))
@@ -124,7 +139,9 @@ const ShowLists = () => {
       })
       .catch((error) => {
         console.error("Error deleting task", error);
-        setError("Error deleting task. Please try again later.");
+        setError(
+          `Error deleting task. Please try again later.  Error: ${error}`
+        );
       });
   };
 
@@ -150,14 +167,20 @@ const ShowLists = () => {
   };
 
   const addTask = (listId) => {
+    const token = localStorage.getItem("token");
     const text = listNewTaskText[listId].trim();
     if (!text) return;
 
     axios
-      .post(`http://localhost:3000/todo/lists/${listId}/tasks`, {
-        text,
-        completed: false,
-      })
+      .post(
+        `http://localhost:3000/todo/lists/${listId}/tasks`,
+        { text, completed: false },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         setLists((prevLists) =>
           prevLists.map((list) => (list._id === listId ? response.data : list))
@@ -174,19 +197,30 @@ const ShowLists = () => {
   };
 
   const addTaskForIntern = () => {
+    const token = localStorage.getItem("token");
     const text = internNewTaskText.trim();
     if (!text || selectedInterns.length === 0) return;
 
     axios
-      .post(`http://localhost:3000/todo/lists`, {
-        recipients: selectedInterns.map((intern) => intern._id),
-        text,
-        completed: false,
-      })
+      .post(
+        `http://localhost:3000/todo/lists`,
+        {
+          recipients: selectedInterns.map((intern) => intern._id),
+          text,
+          completed: false,
+          listName: newListName.trim(), // Pass the new list name
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         fetchLists(); // Refresh lists after adding task list
         setInternNewTaskText("");
         setSelectedInterns([]);
+        setNewListName(""); // Clear the new list name input field
       })
       .catch((error) => {
         console.error("Error adding task for intern", error);
@@ -204,16 +238,22 @@ const ShowLists = () => {
 
   return (
     <div className="show-lists-container">
+
+      {/* Add Task for Intern Section */}
       <div className="add-task-for-intern">
         <h2 className="headers">Create Tasks for Interns</h2>
         <div className="intern-selection">
           <h6 className="headers">Select Intern(s) to Assign to this Task:</h6>
+
+          {/* Intern list items */}
           <div className="intern-list">
             {allInternsManaged.map((intern) => (
               <div
                 key={intern._id}
                 className={`intern-item ${
-                  selectedInterns.some((selected) => selected._id === intern._id)
+                  selectedInterns.some(
+                    (selected) => selected._id === intern._id
+                  )
                     ? "selected"
                     : ""
                 }`}
@@ -223,14 +263,28 @@ const ShowLists = () => {
               </div>
             ))}
           </div>
+
           <div className="add-task">
+            <label htmlFor="task-input">
+              <input
+                type="text"
+                value={internNewTaskText}
+                onChange={(e) => setInternNewTaskText(e.target.value)}
+                placeholder="New task"
+                className="task-input"
+                id="task-input"
+              />
+            </label>
+            <label htmlFor="list-name-input">
             <input
               type="text"
-              value={internNewTaskText}
-              onChange={(e) => setInternNewTaskText(e.target.value)}
-              placeholder="New task"
+              value={newListName}
+              onChange={(e) => setNewListName(e.target.value)}
+              placeholder="New list name"
               className="task-input"
+              id="list-name-input"
             />
+            </label>
             <button className="add-task-button" onClick={addTaskForIntern}>
               Add Task for Intern
             </button>
@@ -238,19 +292,22 @@ const ShowLists = () => {
         </div>
       </div>
 
-      <hr />
+      <hr style={{marginTop: "100px"}}/>
 
       <h2 style={{ textAlign: "center" }}>Task Lists</h2>
       {lists.map((list) => (
         <div key={list._id} className="list">
           <div className="list-header" onClick={() => toggleCollapse(list._id)}>
-            <h3>List ID: {list._id}</h3>
+            <h3>List name: {list.name}</h3>
             <button className="toggle-button">
               {list.collapsed ? "Expand" : "Collapse"}
             </button>
           </div>
           {!list.collapsed && (
             <>
+              <h6 className="headers" style={{ marginTop: "10px" }}>
+                Tasks
+              </h6>
               <ul className="task-list">
                 {list.tasks.map((task) => (
                   <li

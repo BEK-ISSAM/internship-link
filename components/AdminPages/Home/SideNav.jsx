@@ -23,20 +23,20 @@ const SideNav = ({ setActiveContent }) => {
          
           <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('AddJobs')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
             <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
-            Add Job
+            Post A New Job
             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
           </a>
 
           <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Postulation')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
             <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
-            Postulation
+            Applications
             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
           </a>
          
           <div className="sb-sidenav-menu-heading">Addons</div>
           <a className="nav-link" href="#!" onClick={() => setActiveContent('Tasks')}>
             <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
-            Suivie
+            Task Tracking
           </a>
          
         </div>
