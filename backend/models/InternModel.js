@@ -16,6 +16,7 @@ const internSchema = new mongoose.Schema({
   phone: String,
   applications: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   internsManaged: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Intern' }],
+  company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', default: null }
 });
 
 

@@ -7,7 +7,7 @@ import Intern from '../models/InternModel.js';
 export const createJob = async (req, res) => {
     try {
         console.log('Received request body:', req.body);
-        const { title, description, type, salary, contract, location, requirements, responsibilities, assignedTo } = req.body;
+        const { title, description, type, salary, contract, location, requirements, responsibilities, assignedTo, companyId } = req.body;
 
         let assignedToInterns = [];
         let assignedInternsArray = assignedTo || []; // Default to empty array if not provided
@@ -26,7 +26,7 @@ export const createJob = async (req, res) => {
             type,
             salary,
             contract,
-            company: "6659362879f01bd25038d7e9",
+            company: companyId,
             location,
             requirements,
             responsibilities,

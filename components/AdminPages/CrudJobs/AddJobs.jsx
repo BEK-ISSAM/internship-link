@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './AddJobs.css'; // Import custom CSS for styling
+import React, { useState } from "react";
+import axios from "axios";
+import "./AddJobs.css"; // Import custom CSS for styling
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: "http://localhost:3000",
   timeout: 10000,
 });
 
 const AddJobs = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [type, setType] = useState('');
-  const [salary, setSalary] = useState('');
-  const [contract, setContract] = useState('');
-  const [location, setLocation] = useState('');
-  const [requirements, setRequirements] = useState('');
-  const [responsibilities, setResponsibilities] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
+  const [salary, setSalary] = useState("");
+  const [contract, setContract] = useState("");
+  const [location, setLocation] = useState("");
+  const [requirements, setRequirements] = useState("");
+  const [responsibilities, setResponsibilities] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('Submitting job with data:', {
+      const companyId = JSON.parse(localStorage.getItem("user_data")).company;
+      console.log("Submitting job with data:", {
         title,
         description,
         type,
@@ -29,9 +30,10 @@ const AddJobs = () => {
         location,
         requirements,
         responsibilities,
+        companyId,
         assignedTo: [], // Ensure assignedTo is an empty array if not provided
       });
-      const response = await api.post('/Jobs/CreateJob', {
+      const response = await api.post("/Jobs/CreateJob", {
         // I need to add company id here
         title,
         description,
@@ -41,20 +43,21 @@ const AddJobs = () => {
         location,
         requirements,
         responsibilities,
+        companyId,
         assignedTo: [], // Ensure assignedTo is an empty array if not provided
       });
       console.log(response.data);
       // Reset form after successful submission (if needed)
-      setTitle('');
-      setDescription('');
-      setType('');
-      setSalary('');
-      setContract('');
-      setLocation('');
-      setRequirements('');
-      setResponsibilities('');
+      setTitle("");
+      setDescription("");
+      setType("");
+      setSalary("");
+      setContract("");
+      setLocation("");
+      setRequirements("");
+      setResponsibilities("");
     } catch (error) {
-      console.error('Error creating job:', error);
+      console.error("Error creating job:", error);
     }
   };
 

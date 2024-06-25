@@ -21,14 +21,7 @@ const LoginCard = () => {
           navigate('/User');
          
         })
-      
-        
-      
         .catch(err=>console.log(err))
-
-       
-
-
       }
     
   return (
