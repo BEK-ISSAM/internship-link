@@ -98,8 +98,8 @@ const SignUpCard = () => {
               type="radio"
               name="role"
               value="company"
-              checked={role === 'company'}
-              onChange={() => setRole('company')}
+              checked={role === 'admin'}
+              onChange={() => setRole('admin')}
             />
             Company
           </label>

@@ -1,3 +1,4 @@
+// ShowApplications.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ShowApplications.css";
@@ -29,16 +30,52 @@ const ShowApplications = () => {
     };
 
     fetchJobs();
-  }, []);
+  }, [token]);
 
-  const handleAccept = (applicationId) => {
-    // Implement accept logic here, e.g., send a request to backend
-    console.log(`Accepted application with ID: ${applicationId}`);
+  const handleAccept = async (jobId, applicantId) => {
+    try {
+      await axios.post(
+        `http://localhost:3000/jobs/accept/${jobId}/${applicantId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setJobs((prevJobs) =>
+        prevJobs.map((job) =>
+          job._id === jobId
+            ? { ...job, applicants: job.applicants.filter((app) => app._id !== applicantId) }
+            : job
+        )
+      );
+    } catch (err) {
+      console.error("Error accepting application:", err);
+    }
   };
 
-  const handleReject = (applicationId) => {
-    // Implement reject logic here, e.g., send a request to backend
-    console.log(`Rejected application with ID: ${applicationId}`);
+  const handleReject = async (jobId, applicantId) => {
+    try {
+      await axios.post(
+        `http://localhost:3000/jobs/reject/${jobId}/${applicantId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setJobs((prevJobs) =>
+        prevJobs.map((job) =>
+          job._id === jobId
+            ? { ...job, applicants: job.applicants.filter((app) => app._id !== applicantId) }
+            : job
+        )
+      );
+    } catch (err) {
+      console.error("Error rejecting application:", err);
+    }
   };
 
   return (
@@ -91,17 +128,16 @@ const ShowApplications = () => {
                           <div className="action-buttons">
                             <button
                               className="accept-button"
-                              onClick={() => handleAccept(applicant._id)}
+                              onClick={() => handleAccept(job._id, applicant._id)}
                             >
                               Accept
                             </button>
                             <button
                               className="reject-button"
-                              onClick={() => handleReject(applicant._id)}
+                              onClick={() => handleReject(job._id, applicant._id)}
                             >
                               Reject
                             </button>
-                            {/* Add more buttons for other actions */}
                           </div>
                         </td>
                       </tr>

@@ -1,0 +1,79 @@
+.user-tasks-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.tasks-heading {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.task-list {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.list-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 12px;
+}
+
+.tasks {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border: none;
+}
+
+.task-text {
+  font-size: 18px;
+  color: #495057;
+}
+
+.task-status {
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.task-status.completed {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.task-status.pending {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.loading-message,
+.error-message,
+.no-tasks-message {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+  color: #dc3545;
+}

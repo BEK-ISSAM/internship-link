@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 import Intern from "../models/InternModel.js";
+import Company from '../models/CompanyModel.js';
+import Job from '../models/JobModel.js';
 import jwt from "jsonwebtoken";
 
 // Enregistrer un nouvel utilisateur
@@ -85,3 +87,50 @@ export const updateIntern = async (req, res) => {
   }
 };
 
+export const getCompanyById = async (req, res) => {
+  try {
+    const company = await Company.findById(req.params.id);
+    if (!company) {
+      return res.status(404).json({ message: "Company not found" });
+    }
+    res.json(company);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const getApplicationsByInternId = async (req, res) => {
+  try {
+    const internId = req.params.internId;
+
+    // Find jobs where the intern's ID exists in the applicants array
+    const jobs = await Job.find({ applicants: internId })
+      .populate('company', 'name')
+      .populate('assignedTo', 'name');
+
+    res.json(jobs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+export const cancelApplication = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+    const internId = req.user.id; // Assuming you have middleware to get user from token
+
+    const job = await Job.findById(jobId);
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    // Remove intern from applicants array
+    job.applicants = job.applicants.filter(applicant => applicant.toString() !== internId);
+
+    await job.save();
+    res.json({ message: "Application canceled successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

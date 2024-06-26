@@ -1,3 +1,5 @@
+// Import necessary modules and models at the top
+
 import List from "../models/ListModel.js";
 import Intern from "../models/InternModel.js";
 
@@ -41,7 +43,6 @@ export const createList = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 // Get task lists by sender ID
 export const getListsBySender = async (req, res) => {
@@ -93,6 +94,47 @@ export const deleteTask = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+// Get lists by recipient ID
+export const getListsByRecipient = async (req, res) => {
+  try {
+    const { recipientId } = req.params;
+    const lists = await List.find({ recipients: recipientId }).populate(
+      "sender recipients"
+    );
+    res.json(lists);
+  } catch (error) {
+    console.error("Error fetching lists by recipient:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+// Toggle task completion status
+export const toggleTaskStatus = async (req, res) => {
+  try {
+    const { listId, taskId } = req.params;
+    const list = await List.findById(listId);
+
+    if (!list) {
+      return res.status(404).json({ message: "List not found" });
+    }
+
+    const task = list.tasks.id(taskId);
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    task.completed = !task.completed;
+    await list.save();
+
+    res.json(list);
+  } catch (error) {
+    console.error("Error toggling task status:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 
 // Get interns managed by the current user
 export const getInternsManaged = async (req, res) => {

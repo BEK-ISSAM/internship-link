@@ -1,5 +1,5 @@
 import express from 'express';
-import { createJob, getAllJobs, getJobById, updateJob, deleteJob } from '../controllers/JobController.js';
+import { createJob, getAllJobs, getJobById, updateJob, deleteJob, acceptApplication, rejectApplication} from '../controllers/JobController.js';
 
 const router = express.Router();
 
@@ -17,5 +17,8 @@ router.put("/EditJob/:id", updateJob);
 
 // Delete a job
 router.delete("/DeleteJob/:id", deleteJob);
+
+router.post('/accept/:jobId/:applicantId', acceptApplication);
+router.post('/reject/:jobId/:applicantId', rejectApplication);
 
 export default router;

@@ -23,24 +23,24 @@ const SideNavUser = ({ setActiveContent }) => {
             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
           </a> */}
 
-          <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Postulation')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+          <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Applications')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
             <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
-            Postulation
+            Applications
             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
           </a>
-          <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Approuver')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+          <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Company')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
             <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
-            Approuver
+            Company
             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
           </a>
-          <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Charts')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+          <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Tasks')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
             <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
-            Suivie
+            Your Tasks
             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
           </a>
-          <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Profil')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+          <a className="nav-link collapsed" href="#!" onClick={() => setActiveContent('Profile')} data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
             <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
-            Profil
+            Profile
             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
           </a>
           
@@ -48,7 +48,7 @@ const SideNavUser = ({ setActiveContent }) => {
       </div>
       <div className="sb-sidenav-footer">
         <div className="small">Logged in as:</div>
-        Start Bootstrap
+        {JSON.parse(localStorage.getItem("user_data")).name}
       </div>
     </nav>
   );
