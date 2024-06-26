@@ -12,37 +12,6 @@ const LoginCard = () => {
 
     const Submit = (e) => {
         e.preventDefault();
-<<<<<<< HEAD
-        axios.post('http://localhost:3000/User/loginUser' ,{ email , password} )
-        .then(result=>{
-          toast.success("reussit");
-          localStorage.setItem('user_data' , JSON.stringify( result.data.intern))
-          localStorage.setItem('token' , result.data.token  )
-          console.log(result);
-          navigate('/User');
-         
-        })
-        .catch(err=>console.log(err))
-      }
-    
-  return (
-    <div className="login-card">
-     
-      <h1 className="login-title">Sign In</h1>
-      <form onSubmit={Submit} className="login-form">
-        <div className="form-group">
-          <label htmlFor="username" className="form-label">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="username"
-            name="username"
-            className="form-input"
-            placeholder="John Doe"
-            onChange={(e)=>setEmail(e.target.value)}
-          />
-=======
         axios.post('http://localhost:3000/User/loginUser', { email, password })
             .then(result => {
                 toast.success("Success");
@@ -52,7 +21,7 @@ const LoginCard = () => {
                 // Redirection en fonction du rôle
                 if (result.data.intern.role === 'student') {
                     navigate('/User');
-                } else if (result.data.intern.role === 'company') {
+                } else if (result.data.intern.role === 'admin') {
                     navigate('/Admin');
                 } else {
                     // Cas par défaut si le rôle n'est pas défini
@@ -98,7 +67,6 @@ const LoginCard = () => {
                 </div>
                 <button type="submit" className="submit-btn">Sign In</button>
             </form>
->>>>>>> 9847597de37179a50507c0fabb6c0b26b2f5785e
         </div>
     );
 };
