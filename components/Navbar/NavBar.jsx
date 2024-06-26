@@ -51,7 +51,7 @@ function Navbar() {
             </Routes>
 
         <nav className="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="index.html" className="navbar-brand"><h1 className="text-primary display-6">InterLink</h1></a>
+            <a href="/home" className="navbar-brand"><h1 className="text-primary display-6">InterLink</h1></a>
             <button className="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <FontAwesomeIcon icon={faBars} className="text-primary" />
             </button>

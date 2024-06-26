@@ -4,7 +4,7 @@ import SideNav from './SideNav';
 import AdminHome from './AdminHome';
 
 const AppAdmin = () => {
-  const [activeContent, setActiveContent] = useState('AdminHome');
+  const [activeContent, setActiveContent] = useState('Jobs');
 
   return (
     <div>

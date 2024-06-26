@@ -22,17 +22,6 @@ export default function AdminJobs() {
 
   return (
     <div className="container-fluid px-4">
-      <ol className="breadcrumb mb-4">
-        <li className="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li className="breadcrumb-item active">Jobs</li>
-      </ol>
-
-      <div className="card mb-4">
-        <div className="card-body">
-          DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the{" "}
-          <a target="_blank" rel="noopener noreferrer" href="https://datatables.net/">official DataTables documentation</a>.
-        </div>
-      </div>
 
       <div className="card">
         <div className="card-body">

@@ -4,7 +4,7 @@ import SideNavUser from './SideNavUser';
 import UserHome from './UserHome';
 
 const AppUser = () => {
-  const [activeContent, setActiveContent] = useState('UserHome');
+  const [activeContent, setActiveContent] = useState('Applications');
 
   return (
     <div>

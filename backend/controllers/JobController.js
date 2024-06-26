@@ -1,6 +1,5 @@
 import Job from "../models/JobModel.js";
 import Company from "../models/CompanyModel.js";
-import Recruiter from "../models/RecruiterModel.js";
 import Intern from "../models/InternModel.js";
 
 // Create a new job
@@ -161,41 +160,55 @@ export const deleteJob = async (req, res) => {
   }
 };
 
+import Job from "../models/JobModel.js";
+import Company from "../models/CompanyModel.js";
+import Recruiter from "../models/RecruiterModel.js";
+import Intern from "../models/InternModel.js";
+
 export const acceptApplication = async (req, res) => {
-    try {
-      const { jobId, applicantId } = req.params;
-  
-      // Find the job by ID
-      const job = await Job.findById(jobId);
-      if (!job) {
-        return res.status(404).json({ message: "Job not found" });
-      }
-  
-      // Add applicant to assignedTo list and remove from applicants list
-      job.assignedTo.push(applicantId);
-      job.applicants = job.applicants.filter(
-        (id) => id.toString() !== applicantId
-      );
-      await job.save();
-  
-      // Find the intern by ID
-      const intern = await Intern.findById(applicantId);
-      if (!intern) {
-        return res.status(404).json({ message: "Intern not found" });
-      }
-  
-      // Remove job from intern's applications list and set the intern's company
-      intern.applications = intern.applications.filter(
-        (id) => id.toString() !== jobId
-      );
-      intern.company = job.company; // Set the intern's company to the job's company
-      await intern.save();
-  
-      res.status(200).json({ message: "Application accepted" });
-    } catch (err) {
-      res.status(500).json({ message: err.message });
+  try {
+    const { jobId, applicantId } = req.params;
+    const recruiterId = req.user._id; // Assuming you have middleware to attach the user (recruiter) to the request
+    console.log(recruiterId)
+    console.log(applicantId)
+
+    // Find the job by ID
+    const job = await Job.findById(jobId);
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
     }
-  };
+
+    // Add applicant to assignedTo list and remove from applicants list
+    job.assignedTo.push(applicantId);
+    job.applicants = job.applicants.filter(
+      (id) => id.toString() !== applicantId
+    );
+    await job.save();
+
+    // Find the intern by ID
+    const intern = await Intern.findById(applicantId);
+    if (!intern) {
+      return res.status(404).json({ message: "Intern not found" });
+    }
+
+    // Remove job from intern's applications list and set the intern's company
+    intern.applications = intern.applications.filter(
+      (id) => id.toString() !== jobId
+    );
+    intern.company = job.company; // Set the intern's company to the job's company
+    await intern.save();
+
+    // Add intern to recruiter's internsManaged list
+    const recruiter = await Intern.findById(recruiterId);
+    recruiter.internsManaged.push(intern._id);
+    await recruiter.save();
+
+    res.status(200).json({ message: "Application accepted" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
   
 
 export const rejectApplication = async (req, res) => {

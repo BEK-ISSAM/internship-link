@@ -1,5 +1,6 @@
 import express from 'express';
 import { createJob, getAllJobs, getJobById, updateJob, deleteJob, acceptApplication, rejectApplication} from '../controllers/JobController.js';
+import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.put("/EditJob/:id", updateJob);
 // Delete a job
 router.delete("/DeleteJob/:id", deleteJob);
 
-router.post('/accept/:jobId/:applicantId', acceptApplication);
-router.post('/reject/:jobId/:applicantId', rejectApplication);
+router.post('/accept/:jobId/:applicantId', verifyToken, acceptApplication);
+router.post('/reject/:jobId/:applicantId', verifyToken, rejectApplication);
 
 export default router;
