@@ -59,11 +59,9 @@ function Navbar() {
             <div className="collapse navbar-collapse bg-white" id="navbarCollapse">
 
                 <div className="navbar-nav mx-auto">
-                    <a href="index.html" className="nav-item nav-link active">Home</a>
-                   s
-                    <a href=""  className="nav-item nav-link">Offres</a>
-                    <a href="shop-detail.html" className="nav-item nav-link">Mes Emplois</a>
-                    <a href="shop-detail.html" className="nav-item nav-link">Entreprises</a>
+                    <a href="/jobs"  className="nav-item nav-link">Job Offers</a>
+                    <a href="/jobs" className="nav-item nav-link">Entreprises</a>
+                    <a href="/User" className="nav-item nav-link">My applications</a>
                     <a href="contact.html" className="nav-item nav-link">Contact</a>
                 </div>
                 <div className="d-flex m-3 me-0">

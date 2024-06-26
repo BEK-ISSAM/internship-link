@@ -44,6 +44,7 @@ app.use("/Jobs", JobRouter);
 app.use("/applications", ApplicationRouter)
 app.use('/todo', ListRouter);
 app.use("/Grid" , GridJobRouter)
+app.use("/companies" , GridJobRouter)
 
 
 // Route for user login and JWT token generation

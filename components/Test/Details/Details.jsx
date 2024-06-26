@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import NavbarContainer from '../../Navbar/NavBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import logo from './assets/logo-google.svg.png';
 
 const Details = () => {
   const { id } = useParams(); // Utilisation de useParams pour récupérer l'ID
@@ -71,7 +72,7 @@ const Details = () => {
             <div className="row g-4">
               <div className="col-lg-6">
                 <div className="border rounded">
-                  <img src={job.image} className="img-fluid rounded" alt={job.title} />
+                  <img src={logo} className="img-fluid rounded" alt={job.title} />
                 </div>
               </div>
               <div className="col-lg-6">

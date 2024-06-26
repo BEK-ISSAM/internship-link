@@ -3,25 +3,25 @@ import "./SignUpCard.css";
 import axios from 'axios';
 import { toast } from "react-toastify";
 
-const SignUpCard = () => {
+const SignUpCard = ({ switchToLogin }) => {
+  const [name, setFirstname] = useState('');
+  const [lastName, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('student'); // Ajout du state pour gérer le rôle
 
-  const[name , setFirstname]=useState('');
-  const[lastName , setLastname]=useState('');
-  const[email , setEmail]=useState('');
-  const[password , setPassword]=useState('');
-  const[role, setRole] = useState('student'); // Ajout du state pour gérer le rôle
-
-  const Submit = (e)=>{
+  const Submit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/User/registerUser' ,{name , lastName, email , password, role})
-    .then(result =>{
-      toast.success("Success");
-      console.log(result);
-    })
-    .catch(err => {
-      console.error('Error:', err);
-      toast.error("Registration failed");
-    });
+    axios.post('http://localhost:3000/User/registerUser', { name, lastName, email, password, role })
+      .then(result => {
+        toast.success("Success");
+        console.log(result);
+        switchToLogin(); // Call the function to switch to the login form
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        toast.error("Registration failed");
+      });
   }
 
   return (
@@ -34,7 +34,7 @@ const SignUpCard = () => {
           </label>
           <input
             type="text"
-            onChange={(e)=>setFirstname(e.target.value)}
+            onChange={(e) => setFirstname(e.target.value)}
             id="firstName"
             name="firstName"
             className="form-input"
@@ -51,7 +51,7 @@ const SignUpCard = () => {
             name="lastName"
             className="form-input"
             placeholder="Doe"
-            onChange={(e)=>setLastname(e.target.value)}
+            onChange={(e) => setLastname(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -64,7 +64,7 @@ const SignUpCard = () => {
             name="email"
             className="form-input"
             placeholder="example@example.com"
-            onChange={(e)=>setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -77,7 +77,7 @@ const SignUpCard = () => {
             name="password"
             className="form-input"
             placeholder="********"
-            onChange={(e)=>setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -92,7 +92,6 @@ const SignUpCard = () => {
             Student
           </label>
           <br/>
-          
           <label>
             <input
               type="radio"
@@ -104,7 +103,6 @@ const SignUpCard = () => {
             Company
           </label>
         </div>
-
         <button type="submit" className="submit-btn">Sign Up</button>
       </form>
     </div>

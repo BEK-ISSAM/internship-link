@@ -24,7 +24,7 @@ const AuthCard = () => {
           Sign Up
         </button>
       </div>
-      {isLogin ? <LoginCard /> : <SignUpCard />}
+      {isLogin ? <LoginCard /> : <SignUpCard switchToLogin={switchToLogin} />}
     </div>
   );
 };
